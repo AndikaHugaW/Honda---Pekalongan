@@ -3,76 +3,47 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
 import { FadeIn, StaggerContainer, StaggerItem, HoverScale } from '@/components/ui/animations'
 import { motion } from 'framer-motion'
 
 export default function ServicePage() {
   const services = [
     {
-      title: 'Service Berkala',
-      description: 'Perawatan rutin untuk menjaga performa kendaraan Anda tetap optimal',
-      icon: '🔧',
-      features: [
-        'Ganti oli dan filter',
-        'Pemeriksaan komponen',
-        'Service AC',
-        'Pemeriksaan rem',
-      ],
+      number: '01',
+      title: 'MAINTENANCE',
+      description: 'Perawatan berkala profesional untuk menjaga performa optimal kendaraan Anda dengan standar Honda.',
+      image: '/images/home/hero/maintance.png'
     },
     {
-      title: 'Perbaikan',
-      description: 'Perbaikan kerusakan dengan teknisi berpengalaman dan spare part original',
-      icon: '🛠️',
-      features: [
-        'Diagnosis masalah',
-        'Perbaikan mesin',
-        'Perbaikan kelistrikan',
-        'Perbaikan body',
-      ],
+      number: '02',
+      title: 'WHEELS',
+      description: 'Layanan lengkap untuk roda dan ban, termasuk penggantian, balancing, dan alignment dengan teknologi terbaru.',
+      image: '/images/home/hero/wheels.jpg'
     },
     {
-      title: 'Spare Part',
-      description: 'Spare part original Honda dengan garansi resmi',
-      icon: '⚙️',
-      features: [
-        'Spare part original',
-        'Stok lengkap',
-        'Harga kompetitif',
-        'Garansi resmi',
-      ],
+      number: '03',
+      title: 'ALIGNMENT',
+      description: 'Spooring dan balancing presisi untuk kestabilan berkendara dan umur ban yang lebih panjang. Layanan alignment kami menggunakan teknologi laser terbaru untuk memastikan sudut roda yang tepat dan mengurangi keausan ban tidak merata.',
+      image: '/images/home/mobil/card-civic-2.jpg'
     },
     {
-      title: 'Body Repair',
-      description: 'Perbaikan body dan pengecatan dengan standar tinggi',
-      icon: '🎨',
-      features: [
-        'Perbaikan body',
-        'Pengecatan ulang',
-        'Denting repair',
-        'Polish & wax',
-      ],
+      number: '04',
+      title: 'POWER COATING',
+      description: 'Pelapisan cat berkualitas tinggi dengan teknologi modern untuk perlindungan dan tampilan yang tahan lama.',
+      image: '/images/home/hero/power-coating.jpg'
     },
     {
-      title: 'Warranty Service',
-      description: 'Layanan garansi resmi Honda untuk kendaraan baru',
-      icon: '🛡️',
-      features: [
-        'Klaim garansi',
-        'Service gratis',
-        'Survey kerusakan',
-        'Follow up',
-      ],
+      number: '05',
+      title: 'BRAKES',
+      description: 'Layanan perawatan dan penggantian rem dengan komponen asli Honda untuk keamanan maksimal. Kami menyediakan pemeriksaan menyeluruh sistem rem termasuk kampas rem, cakram, minyak rem, dan kaliper dengan standar original Honda.',
+      image: '/images/home/hero/brakes.jpg'
     },
     {
-      title: '24/7 Emergency',
-      description: 'Layanan darurat 24 jam untuk kendaraan Anda',
-      icon: '🚑',
-      features: [
-        'Towing service',
-        'Emergency repair',
-        'Bantuan jalan',
-        'Konsultasi',
-      ],
+      number: '06',
+      title: 'ENGINE SERVICE',
+      description: 'Perawatan mesin komprehensif oleh teknisi berpengalaman untuk performa dan efisiensi optimal.',
+      image: '/images/home/hero/engine.jpg'
     },
   ]
 
@@ -100,7 +71,7 @@ export default function ServicePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       <Navbar />
 
       {/* Hero Section dengan Background Image */}
@@ -300,11 +271,11 @@ export default function ServicePage() {
       </section>
 
       {/* Services Grid */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <motion.span
-              className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-red-600 bg-red-50 rounded-full"
+              className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-red-500 bg-red-500/10 rounded-full border border-red-500/20"
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
@@ -312,134 +283,188 @@ export default function ServicePage() {
             >
               Layanan Kami
             </motion.span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">
               Pilihan Layanan Lengkap
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Berbagai layanan perawatan dan perbaikan untuk kendaraan Honda Anda
             </p>
           </FadeIn>
 
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {/* Services Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-20">
             {services.map((service, index) => (
-              <StaggerItem key={index}>
-                <HoverScale scale={1.03}>
-                  <motion.div
-                    className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border border-gray-100 group"
-                    whileHover={{ y: -8 }}
-                  >
-                    <motion.div
-                      className="text-5xl mb-4"
-                      animate={{
-                        y: [0, -5, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: index * 0.2,
-                        ease: 'easeInOut',
-                      }}
-                    >
-                      {service.icon}
-                    </motion.div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-6">{service.description}</p>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <motion.li
-                          key={idx}
-                          className="flex items-start text-sm text-gray-600"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.05 }}
-                        >
-                          <span className="text-red-600 mr-2 font-bold">✓</span>
-                          <span>{feature}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </HoverScale>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-
-          {/* Why Choose Us */}
-          <FadeIn delay={0.2}>
-            <HoverScale>
-              <div className="bg-gradient-to-br from-red-600 via-red-500 to-orange-500 rounded-3xl shadow-2xl p-12 mb-20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
+              <FadeIn key={index} direction="up" delay={index * 0.1}>
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                  animate={{
-                    x: ['-100%', '100%'],
+                  className="bg-black border border-gray-800 rounded-2xl overflow-hidden group h-full flex flex-col shadow-lg relative"
+                  whileHover={{ 
+                    y: -8,
+                    rotateX: 5,
+                    rotateY: -5,
+                    scale: 1.02,
                   }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'linear',
+                  style={{
+                    perspective: 1000,
+                    transformStyle: 'preserve-3d',
                   }}
-                />
-                <div className="relative z-10">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-12">
-                    Mengapa Pilih Layanan Kami?
-                  </h2>
-                  <StaggerContainer className="grid md:grid-cols-3 gap-8">
-                    {[
-                      {
-                        icon: '🏆',
-                        title: 'Teknisi Berpengalaman',
-                        desc: 'Tim teknisi tersertifikasi dengan pengalaman bertahun-tahun',
-                      },
-                      {
-                        icon: '✅',
-                        title: 'Spare Part Original',
-                        desc: 'Hanya menggunakan spare part original Honda dengan garansi resmi',
-                      },
-                      {
-                        icon: '💰',
-                        title: 'Harga Transparan',
-                        desc: 'Harga yang kompetitif tanpa hidden cost',
-                      },
-                    ].map((item, index) => (
-                      <StaggerItem key={index}>
-                        <motion.div
-                          className="text-center text-white"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <motion.div
-                            className="text-5xl mb-4"
-                            animate={{
-                              rotate: [0, 10, -10, 0],
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              delay: index * 0.5,
-                              ease: 'easeInOut',
-                            }}
-                          >
-                            {item.icon}
-                          </motion.div>
-                          <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                          <p className="text-white/90">{item.desc}</p>
-                        </motion.div>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
-                </div>
-              </div>
-            </HoverScale>
-          </FadeIn>
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                >
+                  {/* 3D Glow Effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-red-500/20 via-transparent to-transparent opacity-0 z-20"
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  
+                  {/* Number and Image */}
+                  <div className="relative">
+                    {/* Number with vertical line */}
+                    <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                      <span className="text-2xl font-bold text-white drop-shadow-lg">{service.number}</span>
+                      <div className="w-px h-8 bg-white"></div>
+                    </div>
+                    {/* Image */}
+                    <div className="relative h-64 overflow-hidden">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1 bg-black relative z-10" style={{ transform: 'translateZ(20px)' }}>
+                    <h3 className="text-xl font-bold text-white uppercase mb-3">{service.title}</h3>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-1">
+                      {service.description}
+                    </p>
+                    
+                    {/* Learn More Button */}
+                    <motion.button
+                      className="flex items-center gap-2 text-red-500 text-sm font-medium group/btn mt-auto"
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <span>LEARN MORE</span>
+                      <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </motion.button>
+                  </div>
+                  
+                  {/* Shine Effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent z-30"
+                    initial={{ x: '-100%', rotate: 45 }}
+                    whileHover={{ x: '200%' }}
+                    transition={{ duration: 0.6, ease: 'easeInOut' }}
+                  />
+                </motion.div>
+              </FadeIn>
+            ))}
+          </div>
+
+          {/* Why Choose Us - SaaS Style */}
+          <div className="mb-20">
+            <FadeIn className="text-center mb-12">
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 tracking-tight">
+                Mengapa Pilih Layanan Kami?
+              </h2>
+              <p className="text-lg text-gray-300 font-medium">
+                Reliability. Quality. Trust. This is the new standard of vehicle care.
+              </p>
+            </FadeIn>
+            
+            <StaggerContainer className="grid md:grid-cols-3 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                  ),
+                  title: 'Expert Certified Technicians',
+                  desc: 'Dedicated service professionals with Honda certification and years of diagnostic expertise for quick resolution.',
+                },
+                {
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  ),
+                  title: 'Genuine OEM Parts Only',
+                  desc: 'Guaranteed original components with official Honda warranty. No compromises on quality or authenticity.',
+                },
+                {
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  ),
+                  title: 'Transparent, Flat-Rate Pricing',
+                  desc: 'No hidden costs, clear quotes delivered upfront. Upfront quotes delivered digitally for complete transparency.',
+                },
+              ].map((item, index) => (
+                <StaggerItem key={index}>
+                  <motion.div
+                    className="bg-black rounded-2xl shadow-lg p-8 border border-gray-800 text-center h-full relative overflow-hidden"
+                    whileHover={{ 
+                      y: -8,
+                      rotateX: 5,
+                      rotateY: -5,
+                      scale: 1.02,
+                    }}
+                    style={{
+                      perspective: 1000,
+                      transformStyle: 'preserve-3d',
+                    }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                  >
+                    {/* 3D Glow Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-red-500/20 via-transparent to-transparent opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    
+                    {/* Content */}
+                    <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
+                      <motion.div
+                        className="w-16 h-16 bg-red-500/10 rounded-xl flex items-center justify-center mx-auto mb-6 text-red-500"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {item.icon}
+                      </motion.div>
+                      <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-300 leading-relaxed text-sm">
+                        {item.desc}
+                      </p>
+                    </div>
+                    
+                    {/* Shine Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                      initial={{ x: '-100%', rotate: 45 }}
+                      whileHover={{ x: '200%' }}
+                      transition={{ duration: 0.6, ease: 'easeInOut' }}
+                    />
+                  </motion.div>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
 
           {/* Booking Steps */}
           <div className="mb-20">
             <FadeIn className="text-center mb-12">
               <motion.span
-                className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-red-600 bg-red-50 rounded-full"
+                className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-red-500 bg-red-500/10 rounded-full border border-red-500/20"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -447,32 +472,60 @@ export default function ServicePage() {
               >
                 Cara Booking
               </motion.span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">
                 Proses Booking Mudah
               </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 Hanya 4 langkah sederhana untuk booking service kendaraan Anda
               </p>
             </FadeIn>
-            <StaggerContainer className="grid md:grid-cols-4 gap-8">
+            <StaggerContainer className="grid md:grid-cols-4 gap-6 lg:gap-8">
               {bookingSteps.map((step, index) => (
                 <StaggerItem key={step.step}>
                   <motion.div
                     className="relative"
-                    whileHover={{ y: -8 }}
+                    whileHover={{ 
+                      y: -8,
+                      rotateX: 5,
+                      rotateY: -5,
+                      scale: 1.02,
+                    }}
+                    style={{
+                      perspective: 1000,
+                      transformStyle: 'preserve-3d',
+                    }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                   >
-                    <div className="bg-white rounded-2xl shadow-lg p-6 text-center border border-gray-100 group hover:border-red-500 transition-colors">
+                    <div className="bg-black rounded-2xl shadow-lg p-6 text-center border border-gray-800 group hover:border-red-500 transition-colors relative overflow-hidden">
+                      {/* 3D Glow Effect */}
                       <motion.div
-                        className="w-20 h-20 bg-gradient-to-br from-red-600 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg"
-                        whileHover={{ rotate: [0, -10, 10, 0] }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        {step.step}
-                      </motion.div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
-                        {step.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">{step.description}</p>
+                        className="absolute inset-0 bg-gradient-to-br from-red-500/20 via-transparent to-transparent opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      
+                      {/* Content */}
+                      <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
+                        <motion.div
+                          className="w-20 h-20 bg-gradient-to-br from-red-600 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg"
+                          whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          {step.step}
+                        </motion.div>
+                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-red-500 transition-colors">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-gray-300">{step.description}</p>
+                      </div>
+                      
+                      {/* Shine Effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                        initial={{ x: '-100%', rotate: 45 }}
+                        whileHover={{ x: '200%' }}
+                        transition={{ duration: 0.6, ease: 'easeInOut' }}
+                      />
                     </div>
                     {step.step < bookingSteps.length && (
                       <motion.div
@@ -498,9 +551,9 @@ export default function ServicePage() {
           {/* CTA Section */}
           <FadeIn delay={0.2}>
             <HoverScale>
-              <div className="bg-white rounded-3xl shadow-2xl p-12 text-center border border-gray-100">
+              <div className="bg-gray-900 rounded-3xl shadow-2xl p-12 text-center border border-gray-800">
                 <motion.h2
-                  className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
+                  className="text-3xl sm:text-4xl font-bold text-white mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -508,7 +561,7 @@ export default function ServicePage() {
                   Siap Melayani Kendaraan Anda
                 </motion.h2>
                 <motion.p
-                  className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto"
+                  className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -540,7 +593,7 @@ export default function ServicePage() {
                   </Link>
                   <Link href="/kontak">
                     <motion.button
-                      className="px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:border-red-500 hover:text-red-600 transition-all duration-300 shadow-md"
+                      className="px-8 py-4 text-lg font-semibold text-white bg-gray-800 border-2 border-gray-700 rounded-xl hover:border-red-500 hover:text-red-500 transition-all duration-300 shadow-md"
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
