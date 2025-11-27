@@ -137,10 +137,9 @@ interface MagneticButtonProps {
 export function MagneticButton({ children, className = '', href, onClick }: MagneticButtonProps) {
   const anchorRef = useRef<HTMLAnchorElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const ref = href ? anchorRef : buttonRef
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const button = ref.current
+  const handleAnchorMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const button = anchorRef.current
     if (!button) return
 
     const rect = button.getBoundingClientRect()
@@ -150,27 +149,40 @@ export function MagneticButton({ children, className = '', href, onClick }: Magn
     button.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`
   }
 
-  const handleMouseLeave = () => {
-    const button = ref.current
+  const handleAnchorMouseLeave = () => {
+    const button = anchorRef.current
     if (!button) return
     button.style.transform = 'translate(0, 0)'
   }
 
-  const commonProps = {
-    onMouseMove: handleMouseMove,
-    onMouseLeave: handleMouseLeave,
-    className,
-    transition: { type: 'spring', stiffness: 300, damping: 20 },
-  } as const
+  const handleButtonMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const button = buttonRef.current
+    if (!button) return
+
+    const rect = button.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+
+    button.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`
+  }
+
+  const handleButtonMouseLeave = () => {
+    const button = buttonRef.current
+    if (!button) return
+    button.style.transform = 'translate(0, 0)'
+  }
 
   if (href) {
     return (
       <motion.a
-        {...commonProps}
         ref={anchorRef}
+        onMouseMove={handleAnchorMouseMove}
+        onMouseLeave={handleAnchorMouseLeave}
+        className={className}
         href={href}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       >
         {children}
       </motion.a>
@@ -179,11 +191,14 @@ export function MagneticButton({ children, className = '', href, onClick }: Magn
 
   return (
     <motion.button
-      {...commonProps}
       ref={buttonRef}
+      onMouseMove={handleButtonMouseMove}
+      onMouseLeave={handleButtonMouseLeave}
+      className={className}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       {children}
     </motion.button>
