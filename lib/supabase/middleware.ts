@@ -1,4 +1,4 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
@@ -8,11 +8,11 @@ export async function updateSession(request: NextRequest) {
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
     if (!supabaseUrl || !supabaseAnonKey) {
-      console.error('Missing Supabase environment variables')
+      // Return response without Supabase if env vars are missing
       return NextResponse.next({ request })
     }
 
-    let supabaseResponse = NextResponse.next({
+    let response = NextResponse.next({
       request,
     })
 
@@ -21,49 +21,26 @@ export async function updateSession(request: NextRequest) {
       supabaseAnonKey,
       {
         cookies: {
-          get(name: string) {
-            return request.cookies.get(name)?.value
+          getAll() {
+            return request.cookies.getAll()
           },
-          set(name: string, value: string, options: CookieOptions) {
-            request.cookies.set({
-              name,
-              value,
-              ...options,
-            })
-            supabaseResponse = NextResponse.next({
-              request,
-            })
-            supabaseResponse.cookies.set({
-              name,
-              value,
-              ...options,
-            })
-          },
-          remove(name: string, options: CookieOptions) {
-            request.cookies.set({
-              name,
-              value: '',
-              ...options,
-            })
-            supabaseResponse = NextResponse.next({
-              request,
-            })
-            supabaseResponse.cookies.set({
-              name,
-              value: '',
-              ...options,
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              request.cookies.set(name, value)
+              response.cookies.set(name, value, options)
             })
           },
         },
       }
     )
 
+    // Refresh session if expired - required for Server Components
     await supabase.auth.getUser()
 
-    return supabaseResponse
+    return response
   } catch (error) {
-    console.error('Middleware error:', error)
-    // Return a response even if there's an error to prevent middleware failure
+    // Log error but don't fail the request
+    // Return a valid response to prevent middleware failure
     return NextResponse.next({ request })
   }
 }
