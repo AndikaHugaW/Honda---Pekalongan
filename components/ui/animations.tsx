@@ -139,6 +139,7 @@ export function MagneticButton({ children, className = '', href, onClick }: Magn
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   // Separate handlers for anchor and button to fix TypeScript type errors
+  // This ensures type safety by using specific refs and handlers for each element type
 
   const handleAnchorMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const button = anchorRef.current
