@@ -135,7 +135,9 @@ interface MagneticButtonProps {
 }
 
 export function MagneticButton({ children, className = '', href, onClick }: MagneticButtonProps) {
-  const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
+  const anchorRef = useRef<HTMLAnchorElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const ref = href ? anchorRef : buttonRef
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const button = ref.current
@@ -155,7 +157,6 @@ export function MagneticButton({ children, className = '', href, onClick }: Magn
   }
 
   const commonProps = {
-    ref,
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
     className,
@@ -166,6 +167,7 @@ export function MagneticButton({ children, className = '', href, onClick }: Magn
     return (
       <motion.a
         {...commonProps}
+        ref={anchorRef}
         href={href}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
@@ -178,6 +180,7 @@ export function MagneticButton({ children, className = '', href, onClick }: Magn
   return (
     <motion.button
       {...commonProps}
+      ref={buttonRef}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
