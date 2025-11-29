@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import { FadeIn, StaggerContainer, StaggerItem, HoverScale } from '@/components/ui/animations'
 import { motion } from 'framer-motion'
 import Dropdown from '@/components/ui/Dropdown'
+import LazyCard from '@/components/ui/LazyCard'
 
 export default function MobilPage() {
   const [selectedMerk, setSelectedMerk] = useState('all')
@@ -279,24 +280,24 @@ export default function MobilPage() {
           {filteredMobil.length > 0 ? (
             <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredMobil.map((mobil, index) => (
-                <StaggerItem key={mobil.id}>
-                  <HoverScale scale={1.03}>
-                    <motion.div
-                      className="bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-white/10"
-                      whileHover={{ y: -8 }}
-                      initial={{ opacity: 0, y: 50 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                    >
+                <LazyCard key={mobil.id} index={index}>
+                  <StaggerItem>
+                    <HoverScale scale={1.03}>
+                      <motion.div
+                        className="bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-white/10"
+                        whileHover={{ y: -8 }}
+                      >
                       {/* Image */}
                       <div className="relative h-64 overflow-hidden bg-gray-800">
                         <Image
                           src={mobil.gambar}
                           alt={mobil.nama}
                           fill
-                          className="object-cover"
+                          className="object-cover transition-opacity duration-300"
+                          loading={index < 3 ? 'eager' : 'lazy'}
+                          priority={index < 2}
                           unoptimized
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                         {mobil.status === 'Tersedia' && (
                           <motion.span
@@ -382,6 +383,7 @@ export default function MobilPage() {
                     </motion.div>
                   </HoverScale>
                 </StaggerItem>
+                </LazyCard>
               ))}
             </StaggerContainer>
           ) : (
