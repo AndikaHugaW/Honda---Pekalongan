@@ -26,8 +26,12 @@ export async function updateSession(request: NextRequest) {
           },
           setAll(cookiesToSet) {
             cookiesToSet.forEach(({ name, value, options }) => {
-              request.cookies.set(name, value)
-              response.cookies.set(name, value, options)
+              try {
+                request.cookies.set(name, value)
+                response.cookies.set(name, value, options)
+              } catch (error) {
+                // Ignore cookie setting errors
+              }
             })
           },
         },
@@ -35,7 +39,12 @@ export async function updateSession(request: NextRequest) {
     )
 
     // Refresh session if expired - required for Server Components
-    await supabase.auth.getUser()
+    try {
+      await supabase.auth.getUser()
+    } catch (authError) {
+      // If auth check fails, still return response
+      // This prevents middleware from crashing
+    }
 
     return response
   } catch (error) {
